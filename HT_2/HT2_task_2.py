@@ -4,15 +4,15 @@
 # The value entered by the user can not be converted (leave a string).
 # The number of elements in the tupels must be different.
 
-def changeVal(a):
-    newList = []
-    for i in tuList:
-        a = list(i)
-        a[-1] = b
-        d = tuple(a)
-        newList.append(d)
-    return newList
+def change_val(val):
+    new_list = []
+    in_val = input("Insert value:\n")
+    for i in val:
+        list_val = list(i)
+        list_val[-1] = in_val
+        tu_list = tuple(list_val)
+        new_list.append(tu_list)
+    return new_list
 
-b = input("Insert value:\n")
-tuList = [(57, 6, "val"), (50, 60, 70, "val"), (35, "val"), ("val",)]
-print(changeVal(tuList))
+someList = [(57, 6, "val"), (50, 60, 70, "val"), (35, "val"), ("val",)]
+print(change_val(someList))
