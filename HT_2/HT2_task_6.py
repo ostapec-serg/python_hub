@@ -1,3 +1,4 @@
+# 6.Write a script that combines three dictionaries into one. Only the first dictionary is updated
 
 exchange_1 = {'EUR':29.7}
 exchange_2 = {'GPB':34.7}
