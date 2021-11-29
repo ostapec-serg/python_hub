@@ -1,14 +1,9 @@
 #Write a function <is_prime> that will take 1 argument - a number from 0 to 1000, and that
 #will return True if this number is prime, and False - if not
 
-import math
-
-def is_prime(n):
-    if 0 < n <=1000:
-        if (math.factorial(n-1)+1) % n!=0:
-            return False
-        else:
-            return True
+def is_prime(num):
+    if 0 < num  <= 1000:
+        return all(num % i for i in range(2, a))
     else:
         return "Number from 0 to 1000 need!!! Try again!)"
 
