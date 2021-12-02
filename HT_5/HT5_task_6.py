@@ -3,10 +3,12 @@
 #  P.S. Generator must return.
 
 def value_func(stop, start=0, step=1):
-    if step > 0:
-        while start < stop:
-            yield start
-            start += step
+    if stop == 0:
+        stop = start
+        start = 0
+    while start < stop:
+        yield start
+        start += step
 
 for elem in value_func(5):
     print(elem)
