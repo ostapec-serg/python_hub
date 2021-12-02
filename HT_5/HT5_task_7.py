@@ -19,8 +19,9 @@ from time import sleep
 
 def generator(lst):
     while True:
-        for item in (x for x in lst):
-            print(item)
-            sleep(0.2)
-
-generator([x.strip() for x in input('Insert comma-separated values:\n').split(",")])
+        for item in lst:
+            yield item
+        sleep(0.5)
+input_list = ([x.strip() for x in input('Insert comma-separated values:\n').split(",")])
+for i in generator(input_list):
+    print(i)

@@ -21,9 +21,9 @@ def valid_login(username, password, silent=False):
         ("Tom", "10101"),
     ]
 
-    if (username, password) in users_list and (silent is False):
+    if (username, password) in users_list and (silent is True):
         return True
-    elif  (username, password) not in users_list and (silent is False):
+    elif  (username, password) not in users_list and (silent is True):
         return False
 
     raise LoginException
