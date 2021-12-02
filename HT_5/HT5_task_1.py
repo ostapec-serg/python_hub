@@ -12,6 +12,7 @@
 class LoginException(Exception):
     pass
 
+
 def valid_login(username, password, silent=False):
     users_list = [
         ("Emma", "121212"),
@@ -21,9 +22,11 @@ def valid_login(username, password, silent=False):
         ("Tom", "10101"),
     ]
 
-    if (username, password) in users_list and (silent is True):
+    if (username, password) in users_list:
+        print("Congratulation! you have access to your account")
         return True
-    elif  (username, password) not in users_list and (silent is True):
+
+    if silent:
         return False
 
     raise LoginException
