@@ -1,0 +1,1 @@
+class Person(object):    def __init__(self, age, name, sex):        self.age = int(age)        self.name = str(name)        self.sex = str(sex)    def show_age(self):        return self.age    def print_name(self):        return self.name    def show_all_info(self):        return self.__dict__

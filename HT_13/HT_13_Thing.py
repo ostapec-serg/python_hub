@@ -1,0 +1,1 @@
+class Thing(object):    print("This class printing this massage")example = Thing()print(type(example), type(Thing))
