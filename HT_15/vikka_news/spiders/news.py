@@ -54,7 +54,9 @@ class NewsSpider(scrapy.Spider):
         to extract the necessary data
         """
         container = response.css('.item-cat-post')
-        print(container)
+        next_page = response.css('.next::attr(href)').get()
+        if next_page:
+            yield response.follow(next_page, callback=self.parse_date_page)
         for links in container:
             link = links.css('a::attr(href)').get()
             yield response.follow(link, callback=self.parse_page_info)
@@ -68,10 +70,16 @@ class NewsSpider(scrapy.Spider):
         item = VikkaNewsItem()
         tag_list = ""
         news_info = ""
-        for tag in page_response.css('a.post-tag::text').getall():
-            tag_list += f"#{tag} "
-        for text in page_response.css('div.entry-content > p::text').getall():
-            news_info += text.replace(u'\xa0', ' ')
+        all_tags = page_response.css('a.post-tag::text').getall()
+        all_text = page_response.css('div.entry-content > p::text').getall()
+        if all_tags:
+            for tag in all_tags:
+                tag_list += f"#{tag} "
+        tag_list += "No tags"
+        if all_text:
+            for text in all_text:
+                news_info += text.replace(u'\xa0', ' ')
+        news_info += "No text"
         item['title_name'] = page_response.css('h1.post-title::text').get()
         item['news_text'] = news_info
         item['tags'] = tag_list
@@ -91,3 +99,5 @@ class NewsSpider(scrapy.Spider):
             return False
     # 2022/01/14
     # 2022.01.14
+    # 2017/11/30
+    # 2017/10/30
