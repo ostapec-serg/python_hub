@@ -75,11 +75,13 @@ class NewsSpider(scrapy.Spider):
         if all_tags:
             for tag in all_tags:
                 tag_list += f"#{tag} "
-        tag_list += "No tags"
+        elif not all_tags:
+            tag_list += "No tags"
         if all_text:
             for text in all_text:
                 news_info += text.replace(u'\xa0', ' ')
-        news_info += "No text"
+        elif not all_text:
+            news_info += "No text"
         item['title_name'] = page_response.css('h1.post-title::text').get()
         item['news_text'] = news_info
         item['tags'] = tag_list
