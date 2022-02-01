@@ -1,0 +1,1 @@
+<b>Choose category : </b><form action="scrap-story/" method="get">    <select name = "story_name" >        {% for story_name in news_story %}            <option value="{{ story_name}}">{{story_name}}</option>   {% endfor %}</select>  <input type="submit" value="Select"></form>
