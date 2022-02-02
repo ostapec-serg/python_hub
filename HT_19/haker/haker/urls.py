@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from scrap import views
+
 urlpatterns = [
-    path('', include('scrap.urls')),
+    path('scrap-story/', include('scrap.urls')),
     path('admin/', admin.site.urls),
+    path('', views.main, name='main'),
 ]

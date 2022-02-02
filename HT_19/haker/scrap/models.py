@@ -2,8 +2,8 @@ from django.db import models
 
 
 class Job(models.Model):
-    id_story = models.IntegerField(default=0, unique=True)
-    by = models.CharField(max_length=200)
+    id_story = models.IntegerField('Story identificator', default=0, unique=True)
+    by = models.CharField('Author', max_length=200)
     score = models.IntegerField(default=0)
     title = models.CharField(max_length=300)
     text = models.TextField(default='No content')
@@ -13,8 +13,8 @@ class Job(models.Model):
 
 
 class Ask(models.Model):
-    id_story = models.IntegerField(default=0, unique=True)
-    by = models.CharField(max_length=200)
+    id_story = models.IntegerField('Story identificator', default=0, unique=True)
+    by = models.CharField('Author', max_length=200)
     score = models.IntegerField(default=0)
     descendants = models.IntegerField(default=0)
     kids = models.TextField(default='No content')
@@ -25,8 +25,8 @@ class Ask(models.Model):
 
 
 class New(models.Model):
-    id_story = models.IntegerField(default=0, unique=True)
-    by = models.CharField(max_length=200)
+    id_story = models.IntegerField('Story identificator', default=0, unique=True)
+    by = models.CharField('Author', max_length=200)
     score = models.IntegerField(default=0)
     descendants = models.IntegerField(default=0)
     kids = models.TextField(default='No content')
@@ -38,8 +38,8 @@ class New(models.Model):
 
 
 class Show(models.Model):
-    id_story = models.IntegerField(default=0, unique=True)
-    by = models.CharField(max_length=200)
+    id_story = models.IntegerField('Story identificator', default=0, unique=True)
+    by = models.CharField('Author', max_length=200)
     score = models.IntegerField(default=0)
     descendants = models.IntegerField(default=0)
     kids = models.TextField(default='No content')

@@ -1,6 +1,6 @@
 from django.db import IntegrityError
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 
 import re
 import requests
@@ -57,22 +57,48 @@ def save_data(i_d):
     """
     url = f"https://hacker-news.firebaseio.com/v0/item/{i_d}.json"
     response = requests.get(url)
+    check = response.content
+    if check is None:
+        return None
     content_to_write = {}
-    for key, val in response.json().items():
-        if key == 'kids':
-            val = str(val)
-        elif key == 'id':
-            content_to_write['id_story'] = val
-            continue
-        elif key == 'time':
-            content_to_write[key] = time_convert(val)
-            continue
-        elif key == 'title' or key == 'text':
-            content_to_write[key] = clean_up_text(val)
-            continue
+    try:
+        for key, val in response.json().items():
+            if key == 'kids':
+                val = str(val)
+            elif key == 'id':
+                content_to_write['id_story'] = val
+                continue
+            elif key == 'time':
+                content_to_write[key] = time_convert(val)
+                continue
+            elif key == 'title' or key == 'text':
+                content_to_write[key] = clean_up_text(val)
+                continue
+            content_to_write[key] = val
+        return content_to_write
+    except AttributeError:
+        return None
 
-        content_to_write[key] = val
-    return content_to_write
+
+def check_uniq(id_list, story_model):
+    """
+    the method checks if the id from the parsing list is unique.
+    If the database has an entry with a specific id, then it is
+    excluded from the list for parsing
+    return: checked list for parsing or empty
+        list if all ids are in the database
+    """
+    objects_list = story_model.objects.all()
+    id_story_from_objects = []
+    for element in objects_list:
+        id_story_from_objects.append(element.id_story)
+    if id_story_from_objects:
+        checked_id_list = []
+        for element in id_list:
+            if element not in id_story_from_objects:
+                checked_id_list.append(element)
+        return checked_id_list
+    return id_list
 
 
 def get_data(request):
@@ -88,15 +114,19 @@ def get_data(request):
         'newstories': models.New,
         'jobstories': models.Job,
     }
+    story_model = story_name_model_map[story_name]
     id_list = create_list_id(story_name)
-
-    for result in id_list:
-        try:
-            to_write = save_data(result)
-            story_model = story_name_model_map[story_name]
-            story = story_model(**to_write)
-            story.save()
-        except IntegrityError:
-            pass
-    return HttpResponse(f"{story_name} scraped")
+    checked_id_list = check_uniq(id_list, story_model)
+    if checked_id_list:
+        for result in checked_id_list:
+            try:
+                to_write = save_data(result)
+                if to_write is None:
+                    continue
+                story = story_model(**to_write)
+                story.save()
+            except IntegrityError:
+                pass
+        return HttpResponse(f"Category {story_name} scraped")
+    return HttpResponse(f"Nothing to scrap in {story_name} category")
     # return HttpResponseRedirect(reverse('scrap:main'))

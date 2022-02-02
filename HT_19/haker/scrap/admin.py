@@ -4,8 +4,8 @@ from scrap.models import Ask, Job, Show, New
 
 
 class StoryAdmin(admin.ModelAdmin):
-    list_display = ('id_story', 'by', 'title', )
-    list_display_links = ('id_story', 'title', )
+    list_display = ('title', 'by', 'id_story')
+    list_display_links = ('by', 'title', )
 
 
 admin.site.register(Ask, StoryAdmin)
