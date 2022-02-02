@@ -2,16 +2,8 @@ from django.db import IntegrityError
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 
-
-
-
-
 import re
 import requests
-
-import sqlite3
-
-from django.urls import reverse
 
 from scrap import models
 import html

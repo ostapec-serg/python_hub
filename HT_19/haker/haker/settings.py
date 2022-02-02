@@ -16,6 +16,14 @@ try:
     from .Local_settings import *
 except ImportError:
     pass
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    SECRET_KEY = 'django-insecure--@4z(&!5!431o5kms+zd&r8$-sewe1l+hse!5jm&lu$oxlub9-'
+    DATABASES = {
+       'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
