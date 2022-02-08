@@ -18,7 +18,9 @@ try:
 except ImportError:
     pass
     BASE_DIR = Path(__file__).resolve().parent.parent
-    SECRET_KEY = 'django-insecure--@4z(&!5!431o5kms+zd&r8$-sewe1l+hse!5jm&lu$oxlub9-'
+
+    SECRET_KEY = 'django-insecure-uk31u@j+7#86-wjt3%khs3ybqp1x=ju-v19%yz1t@!if2fff1x'
+
     DATABASES = {
        'default': {
             'ENGINE': 'django.db.backends.sqlite3',
