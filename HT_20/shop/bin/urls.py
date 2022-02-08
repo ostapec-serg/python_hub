@@ -1,0 +1,1 @@
+from django.urls import pathfrom bin import viewsapp_name = 'bin'urlpatterns = [    path('add/', views.add_to_cart, name='add_to_cart'),    path('remove/<int:pk>', views.remove_from_cart, name='remove_from_cart'),    path('', views.user_cart, name='user_cart'),]
