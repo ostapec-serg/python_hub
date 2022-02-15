@@ -1,0 +1,1 @@
+from django.urls import pathfrom favorites import viewsapp_name = 'bin'urlpatterns = [    path('add/', views.add_to_favorites, name='add_to_favorites'),    path('remove/<int:pk>', views.remove_from_favorites, name='remove_from_favorites'),    path('', views.user_favorites, name='user_favorites'),]
