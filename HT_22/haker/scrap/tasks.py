@@ -1,0 +1,1 @@
+from haker.celery import appfrom scrap.service import get_data@app.taskdef scrap_category(story_name):    get_data(story_name)

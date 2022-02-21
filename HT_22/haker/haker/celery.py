@@ -1,0 +1,1 @@
+import osfrom celery import Celeryos.environ.setdefault('DJANGO_SETTINGS_MODULE', 'haker.settings')app = Celery('haker')app.config_from_object('django.conf:settings', namespace='CELERY')app.autodiscover_tasks()
