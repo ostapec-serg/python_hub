@@ -1,1 +1,8 @@
-from django.urls import pathfrom authorize.views import UserAuthapp_name = 'authorize'urlpatterns = [    path('', UserAuth.as_view(), name='authorize'),]
+from django.urls import path
+
+from authorize.views import UserAuth
+
+app_name = 'authorize'
+urlpatterns = [
+    path('', UserAuth.as_view(), name='authorize'),
+]
